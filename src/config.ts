@@ -28,7 +28,7 @@ export interface Config {
   };
   theme: {
     name: string;
-    engine: 'nunjucks' | 'handlebars' | 'mustache' | 'ejs';
+    engine: 'nunjucks' | 'handlebars' | 'mustache' | 'ejs' | 'pug' | 'eta' | 'dot' | 'liquidjs';
   };
 }
 
