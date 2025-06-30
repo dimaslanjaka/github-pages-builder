@@ -77,7 +77,11 @@ export function slugify(s: string) {
   );
 }
 
-export const md = new MarkdownIt(undefined, undefined).use(anchor, {
+export const md = new MarkdownIt('default', {
+  html: true,
+  linkify: true,
+  typographer: true
+}).use(anchor, {
   slugify // use custom slugify for consistency
 });
 
