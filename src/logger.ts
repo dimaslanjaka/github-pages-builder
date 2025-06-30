@@ -3,17 +3,17 @@ import path from 'path';
 import { writefile } from 'sbg-utility';
 import { projectDir } from './init.js';
 
-const logFilePath = path.resolve(projectDir, 'tmp/github-pages-builder.log');
-// Always reset log file at startup
-// This ensures that each run starts with a clean log file
-// and avoids appending to previous runs' logs.
-// This is useful for debugging and tracking issues in the current run.
-writefile(logFilePath, '');
-
 export const nodeConsole = globalThis.console;
 
 export default class Logger {
   protected static debug = false;
+  protected static logFilePath: string = path.resolve(projectDir, 'tmp/github-pages-builder.log');
+
+  static setLogFilePath(filePath: string) {
+    Logger.logFilePath = filePath;
+    // Reset log file at new path
+    writefile(Logger.logFilePath, '');
+  }
 
   static setDebug(value: boolean) {
     Logger.debug = value;
@@ -27,7 +27,7 @@ export default class Logger {
       console.log(formattedMessage, ...args);
     }
 
-    fs.appendFileSync(logFilePath, formattedMessage + '\n', 'utf8');
+    fs.appendFileSync(Logger.logFilePath, formattedMessage + '\n', 'utf8');
   }
 
   static warn(message: string, ...args: any[]) {
@@ -38,7 +38,7 @@ export default class Logger {
       console.warn(formattedMessage, ...args);
     }
 
-    fs.appendFileSync(logFilePath, formattedMessage + '\n', 'utf8');
+    fs.appendFileSync(Logger.logFilePath, formattedMessage + '\n', 'utf8');
   }
 
   static error(message: string, ...args: any[]) {
@@ -49,6 +49,11 @@ export default class Logger {
       console.error(formattedMessage, ...args);
     }
 
-    fs.appendFileSync(logFilePath, formattedMessage + '\n', 'utf8');
+    fs.appendFileSync(Logger.logFilePath, formattedMessage + '\n', 'utf8');
+  }
+
+  // Reset log file at startup
+  static {
+    writefile(Logger.logFilePath, '');
   }
 }
