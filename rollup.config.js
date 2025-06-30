@@ -77,7 +77,7 @@ const rollupConfig = [
     output: {
       dir: 'test/fixtures',
       format: 'cjs',
-      exports: 'named',
+      exports: 'default',
       entryFileNames: '[name].cjs'
     },
     plugins: [
