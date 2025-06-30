@@ -39,7 +39,17 @@ describe('Configuration System', () => {
         const configModule = await import(pathToFileURL(testConfigPath).href);
 
         // Get the config export (handle both ESM default and CommonJS)
-        const configExport = configModule.default;
+        let configExport;
+        if (configModule.default !== undefined) {
+          // ESM default export
+          configExport = configModule.default;
+        } else if (typeof configModule === 'object' && configModule !== null) {
+          // CommonJS module.exports (appears as the module object itself)
+          configExport = configModule;
+        } else {
+          throw new Error(`No valid config export found in ${configFilename}`);
+        }
+
         expect(configExport).toBeDefined();
 
         let config;
@@ -69,14 +79,26 @@ describe('Configuration System', () => {
         // Import the config file dynamically
         const configModule = await import(pathToFileURL(testConfigPath).href);
 
+        // Get the config export (handle both ESM default and CommonJS)
+        let configExport;
+        if (configModule.default !== undefined) {
+          // ESM default export
+          configExport = configModule.default;
+        } else if (typeof configModule === 'object' && configModule !== null) {
+          // CommonJS module.exports (appears as the module object itself)
+          configExport = configModule;
+        } else {
+          throw new Error(`No valid config export found in ${configFilename}`);
+        }
+
         // Log the structure for debugging
         console.log(`Config file: ${configFilename}`);
-        console.log(`Export type: ${typeof configModule.default}`);
-        console.log(`Is function: ${typeof configModule.default === 'function'}`);
-        console.log(`Is object: ${typeof configModule.default === 'object'}`);
+        console.log(`Export type: ${typeof configExport}`);
+        console.log(`Is function: ${typeof configExport === 'function'}`);
+        console.log(`Is object: ${typeof configExport === 'object'}`);
 
-        expect(configModule.default).toBeDefined();
-        expect(['function', 'object'].includes(typeof configModule.default)).toBe(true);
+        expect(configExport).toBeDefined();
+        expect(['function', 'object'].includes(typeof configExport)).toBe(true);
       });
 
       it(`should run /bin/build-gh-pages.js with ${configFilename}`, async () => {
