@@ -26,12 +26,16 @@ const config: JestConfigWithTsJest = {
   roots: [`<rootDir>/test`],
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/tmp/', '/test/'],
   testMatch: [
-    '**/__tests__/**/*.+(ts|tsx|[cm]js)',
-    '**/?(*.)+(spec|test).+(ts|tsx|[cm]js)',
-    '**/test/*.test.ts',
-    '!**/.deploy_git/**'
+    '**/__tests__/**/*.+(ts|tsx|js|jsx|mjs|cjs)',
+    '**/?(*.)+(spec|test).+(ts|tsx|js|jsx|mjs|cjs)',
+    '**/test/*.test.+(ts|js)',
+    '!**/.deploy_git/**',
+    '!**/fixtures/**',
+    '!**/vendor/**',
+    '!**/dist/**',
+    '!**/node_modules/**',
   ],
-  extensionsToTreatAsEsm: ['.ts'],
+  extensionsToTreatAsEsm: ['.ts', '.mts'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
@@ -52,6 +56,12 @@ const config: JestConfigWithTsJest = {
         },
         useESM: true,
         tsconfig: path.join(__dirname, 'tsconfig.jest.json')
+      }
+    ],
+    '^.+\\.(js|jsx|mjs)$': [
+      'babel-jest',
+      {
+        presets: [['@babel/preset-env', { targets: { node: 'current' } }]]
       }
     ],
     '^.+\\.cjs$': [

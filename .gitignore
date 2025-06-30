@@ -5,6 +5,8 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+.yarn/*.gz
+.yarn/cache*/
 
 # Optional npm cache directory
 .npm/
@@ -25,6 +27,17 @@ coverage/
 # Build output
 dist/
 build/
+
+# Temp
+**/tmp/
+temp/
+*.tmp/
+*.temp/
+*.txt
+**/.cache
+
+# Logs
+*.log
 
 # IDE files
 .vscode/

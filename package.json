@@ -79,6 +79,7 @@
     "@types/node": "^24.0.7",
     "@types/nunjucks": "^3.2.6",
     "@typescript-eslint/parser": "^8.20.0",
+    "babel-jest": "^30.0.2",
     "binary-collections": "^2.0.6",
     "cross-env": "^7.0.3",
     "eslint": "^9.30.0",
