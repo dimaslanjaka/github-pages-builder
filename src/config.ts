@@ -8,7 +8,10 @@ import * as glob from 'glob';
 import path from 'path';
 import { pathToFileURL } from 'url';
 import { projectDir } from './init.js';
-import console from './logger.js';
+import Logger from './logger.js';
+
+const console = new Logger();
+console.setLogFilePath(path.join(projectDir, 'tmp/gh-pages-logs/config.log'));
 
 const configFilenames = ['gh-pages-builder.config.cjs', 'gh-pages-builder.config.mjs', 'gh-pages-builder.config.js'];
 

@@ -6,54 +6,56 @@ import { projectDir } from './init.js';
 export const nodeConsole = globalThis.console;
 
 export default class Logger {
-  protected static debug = false;
-  protected static logFilePath: string = path.resolve(projectDir, 'tmp/github-pages-builder.log');
+  protected debug = false;
+  protected logFilePath: string;
 
-  static setLogFilePath(filePath: string) {
-    Logger.logFilePath = filePath;
+  constructor(logFilePath?: string, debug: boolean = false) {
+    this.logFilePath = logFilePath ?? path.resolve(projectDir, 'tmp/github-pages-builder.log');
+    this.debug = debug;
+    // Reset log file at startup
+    writefile(this.logFilePath, '');
+  }
+
+  setLogFilePath(filePath: string) {
+    this.logFilePath = filePath;
     // Reset log file at new path
-    writefile(Logger.logFilePath, '');
+    writefile(this.logFilePath, '');
   }
 
-  static setDebug(value: boolean) {
-    Logger.debug = value;
+  setDebug(value: boolean) {
+    this.debug = value;
   }
 
-  static log(message: string, ...args: any[]) {
+  log(message: string, ...args: any[]) {
     const timestamp = new Date().toISOString();
     const formattedMessage = `[${timestamp}] ${message}`;
 
-    if (Logger.debug) {
+    if (this.debug) {
       console.log(formattedMessage, ...args);
     }
 
-    fs.appendFileSync(Logger.logFilePath, formattedMessage + '\n', 'utf8');
+    fs.appendFileSync(this.logFilePath, formattedMessage + '\n', 'utf8');
   }
 
-  static warn(message: string, ...args: any[]) {
+  warn(message: string, ...args: any[]) {
     const timestamp = new Date().toISOString();
     const formattedMessage = `[${timestamp}] WARN: ${message}`;
 
-    if (Logger.debug) {
+    if (this.debug) {
       console.warn(formattedMessage, ...args);
     }
 
-    fs.appendFileSync(Logger.logFilePath, formattedMessage + '\n', 'utf8');
+    fs.appendFileSync(this.logFilePath, formattedMessage + '\n', 'utf8');
   }
 
-  static error(message: string, ...args: any[]) {
+  error(message: string, ...args: any[]) {
     const timestamp = new Date().toISOString();
     const formattedMessage = `[${timestamp}] ERROR: ${message}`;
 
-    if (Logger.debug) {
+    if (this.debug) {
       console.error(formattedMessage, ...args);
     }
 
-    fs.appendFileSync(Logger.logFilePath, formattedMessage + '\n', 'utf8');
-  }
-
-  // Reset log file at startup
-  static {
-    writefile(Logger.logFilePath, '');
+    fs.appendFileSync(this.logFilePath, formattedMessage + '\n', 'utf8');
   }
 }

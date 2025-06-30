@@ -5,8 +5,11 @@ import path from 'path';
 import { writefile } from 'sbg-utility';
 import { Config } from './config.js';
 import { projectDir } from './init.js';
-import console from './logger.js';
+import Logger from './logger.js';
 import { printDirectory } from './utils.js';
+
+const console = new Logger();
+console.setLogFilePath(path.join(projectDir, 'tmp/gh-pages-logs/build-markdown.log'));
 
 export function buildMarkdowns(markdownFiles: string[], config: Config): { files: string[]; outputDir: string } {
   const outputMarkdownDir = path.join(projectDir, config.outputDir.markdown);
