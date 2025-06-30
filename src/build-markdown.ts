@@ -9,9 +9,6 @@ import console from './logger.js';
 import { printDirectory } from './utils.js';
 
 export function buildMarkdowns(markdownFiles: string[], config: Config): { files: string[]; outputDir: string } {
-  /**
-   * Output directory for processed markdown files
-   */
   const outputMarkdownDir = path.join(projectDir, config.outputDir.markdown);
   const generatedFiles: string[] = [];
 
@@ -47,7 +44,7 @@ export function buildMarkdowns(markdownFiles: string[], config: Config): { files
     }
 
     writefile(outputFilePath, markdown);
-    generatedFiles.push(outputFilePath);
+    generatedFiles.push(path.relative(projectDir, outputFilePath));
     console.log(`✅ Processed: ${sourceFilePath} -> ${outputFilePath}`);
   });
 
