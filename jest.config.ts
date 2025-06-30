@@ -33,7 +33,7 @@ const config: JestConfigWithTsJest = {
     '!**/fixtures/**',
     '!**/vendor/**',
     '!**/dist/**',
-    '!**/node_modules/**',
+    '!**/node_modules/**'
   ],
   extensionsToTreatAsEsm: ['.ts', '.mts'],
   moduleNameMapper: {
@@ -75,8 +75,19 @@ const config: JestConfigWithTsJest = {
   // detectOpenHandles: true,
   clearMocks: true,
   collectCoverage: true,
+  coverageReporters: ['html'],
   coverageDirectory: 'coverage',
-  coverageProvider: 'v8'
+  coverageProvider: 'v8',
+  reporters: [
+    'default',
+    [
+      './node_modules/jest-html-reporter',
+      {
+        pageTitle: 'Test Report',
+        outputPath: 'coverage/test-report.html'
+      }
+    ]
+  ]
 };
 
 if (!existsSync(<string>config.cacheDirectory)) mkdirSync(<string>config.cacheDirectory, { recursive: true });
