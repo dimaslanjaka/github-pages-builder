@@ -58,7 +58,7 @@
     "markdown-it-anchor": "^9.2.0",
     "mustache": "^4.2.0",
     "nunjucks": "^3.2.4",
-    "sbg-utility": "^2.0.8"
+    "sbg-utility": "^2.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",
@@ -82,7 +82,7 @@
     "@typescript-eslint/eslint-plugin": "^8.35.1",
     "@typescript-eslint/parser": "^8.35.1",
     "babel-jest": "^30.0.2",
-    "binary-collections": "^2.0.6",
+    "binary-collections": "^2.0.9",
     "cross-env": "^7.0.3",
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
@@ -101,12 +101,12 @@
     "typescript": "^5.8.3"
   },
   "resolutions": {
-    "binary-collections": "https://github.com/dimaslanjaka/bin/raw/53b089eeece3a15550d13fc6de88c9ebbd6fef9d/releases/bin.tgz",
-    "sbg-utility": "^2.0.8",
+    "binary-collections": "https://github.com/dimaslanjaka/bin/raw/2e0a11aae56d84ca7cece6056cf6ccc2f232c8f3/releases/bin.tgz",
+    "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/ec00a195a63cdb4c6bb34c2d17d3fad734530d47/packages/sbg-utility/release/sbg-utility.tgz",
     "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/17ccc825cbb3e4c6d59edada5f6d93f27075d752/release/markdown-it.tgz"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   },
   "packageManager": "yarn@4.9.2"
 }
