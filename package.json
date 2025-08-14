@@ -27,9 +27,8 @@
     "url": "https://webmanajemen.com"
   },
   "repository": {
-    "url": "https://github.com/dimaslanjaka/php-proxy-hunter",
-    "type": "git",
-    "directory": "packages/gh-pages-builder"
+    "url": "https://github.com/dimaslanjaka/github-pages-builder.git",
+    "type": "git"
   },
   "keywords": [
     "github-pages",
