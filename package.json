@@ -57,7 +57,7 @@
     "markdown-it-anchor": "^9.2.0",
     "mustache": "^4.2.0",
     "nunjucks": "^3.2.4",
-    "sbg-utility": "^2.0.9"
+    "sbg-utility": "^2.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",
